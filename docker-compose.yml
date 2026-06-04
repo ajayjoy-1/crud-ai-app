@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  db: # PostgreSQL Container
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: person_db
+      POSTGRES_USER: production_user
+      # 1. Ensure this password matches the backend exactly
+      POSTGRES_PASSWORD: supersecretsecurepassword123
+    volumes:
+      # 2. Map the internal database to a persistent volume
+      - postgres_data:/var/lib/postgresql/data
+
+  backend: # Django Container
+    build: ./backend
+    environment:
+      # Explicitly pass the matching credentials to Django
+      - DB_NAME=person_db
+      - DB_USER=production_user
+      - DB_PASSWORD=supersecretsecurepassword123
+      - DB_HOST=db
+      - DB_PORT=5432
+    depends_on:
+      - db
+
+  frontend: # React Container
+    build: ./frontend
+
+  nginx: # NGINX Load Balancer
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+
+  certbot: # Certbot SSL
+    image: certbot/certbot
+
+# 3. Declare the persistent volume at the bottom of the file
+volumes:
+  postgres_data:
