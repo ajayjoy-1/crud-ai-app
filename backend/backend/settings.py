@@ -130,3 +130,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # <-- ADD THIS LINE
 # Media files configuration (for image uploads)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Pull the Gemini API key from the server environment
+GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')

@@ -4,13 +4,15 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Person, ChatMessage
 from google import genai
+from django.conf import settings
 
 class PersonViewSet(viewsets.ModelViewSet):
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
 
 # 1. Authenticate with your secret key
-client = genai.Client(api_key="AIzaSyBIm5dlGDppYsj7g23dxYmP4orp0oNdkbw")
+# Grab the key securely from settings, not a hardcoded string
+client = genai.Client(api_key=settings.GEMINI_API_KEY)
 
 @api_view(['GET', 'POST'])
 def ai_chat_handler(request):
