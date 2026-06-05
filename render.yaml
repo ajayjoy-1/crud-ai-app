@@ -1,11 +1,13 @@
-services:
-  # 1. THE DATABASE (PostgreSQL)
-  - type: psql
-    name: crud-database
+# 1. THE DATABASE (PostgreSQL)
+# Databases must be in their own section, not under services!
+databases:
+  - name: crud-database
     plan: free
     region: ohio
 
-  # 2. THE BACKEND (Django Docker Container)
+# 2. THE WEB SERVICES (Django and React)
+services:
+  # THE BACKEND (Django Docker Container)
   - type: web
     name: crud-backend
     env: docker
@@ -21,7 +23,7 @@ services:
       - key: ALLOWED_HOSTS
         value: '*'
 
-  # 3. THE FRONTEND (React Static Site)
+  # THE FRONTEND (React Static Site)
   - type: web
     name: crud-frontend
     env: static
