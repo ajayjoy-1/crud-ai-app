@@ -19,4 +19,5 @@ COPY . /app/
 
 # Expose port and run Gunicorn (As requested in the PDF)
 EXPOSE 8000
-CMD ["gunicorn", "backend.wsgi:application", "--bind", "0.0.0.0:8000"]
+# Run migrations, create a default admin (if it doesn't exist), and start the server
+CMD sh -c "python manage.py migrate && python manage.py createsuperuser --noinput --username admin --email admin@example.com || true && gunicorn backend.wsgi:application --bind 0.0.0.0:8000"
