@@ -118,7 +118,7 @@ function Persons() {
 
       {/* --- LIST SECTION --- */}
       <div>
-        {persons.map((person) => (
+        {persons?.map((person) => (
           <div key={person.id} style={{ display: 'flex', alignItems: 'center', marginBottom: '15px', borderBottom: '1px solid #eee', paddingBottom: '10px' }}>
             
             {person.image && (
