@@ -1,5 +1,4 @@
 # 1. THE DATABASE (PostgreSQL)
-# Databases must be in their own section, not under services!
 databases:
   - name: crud-database
     plan: free
@@ -10,7 +9,7 @@ services:
   # THE BACKEND (Django Docker Container)
   - type: web
     name: crud-backend
-    env: docker
+    runtime: docker
     plan: free
     dockerfilePath: ./backend/Dockerfile
     envVars:
@@ -26,8 +25,8 @@ services:
   # THE FRONTEND (React Static Site)
   - type: web
     name: crud-frontend
-    env: static
-    plan: free
+    runtime: static
+    # NOTICE: No 'plan' field here! Static sites do not use plans.
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: ./frontend/dist
     envVars:
