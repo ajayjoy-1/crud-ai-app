@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://crud-backend-lpf5.onrender.com/api/persons/';
+// Grab the base URL from Render, OR use localhost if we are on our own computer
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+
+// Combine them safely!
+const API_URL = `${BASE_URL}/api/persons/`;
 
 function Persons() {
   const [persons, setPersons] = useState([]);
