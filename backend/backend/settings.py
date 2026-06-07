@@ -81,8 +81,8 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-# Check if Render provided a database URL
-DATABASE_URL = os.environ.get('DATABASE_URL')
+# Check for our bulletproof External URL first. If it's missing, fall back to the old one.
+DATABASE_URL =  os.environ.get('DATABASE_URL')
 
 if DATABASE_URL:
     # If we are on Render, use the live cloud database
