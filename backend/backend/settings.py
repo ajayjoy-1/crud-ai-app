@@ -87,7 +87,7 @@ DATABASE_URL = os.environ.get('EXTERNAL_DATABASE_URL') or os.environ.get('DATABA
 if DATABASE_URL:
     # If we are on Render, use the live cloud database
     DATABASES = {
-        'default': dj_database_url.parse(default=DATABASE_URL, conn_max_age=600)
+        'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
     }
 else:
     # If we are testing locally, use the Docker container settings
