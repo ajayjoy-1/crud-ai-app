@@ -1,7 +1,7 @@
 
 # Full-Stack AI Person Manager
 
-A robust full-stack web application featuring complete CRUD functionality for managing profiles and an integrated, memory-aware AI Chat assistant powered by Google Gemini. This project is containerized using Docker and architected for production deployment on Render.
+A robust python full-stack web application featuring complete CRUD functionality for managing profiles and an integrated, memory-aware AI Chat assistant powered by Google Gemini. This project is containerized using Docker and architected for production deployment on Render.
 
 ## ✨ Features
 
